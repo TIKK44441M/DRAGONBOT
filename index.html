@@ -1,51 +1,257 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>🔥 DRAGON LNC 🔥</title>
-<style>
-body{margin:0;padding:0;font-family:"Tahoma",sans-serif;text-align:center;direction:rtl;background:linear-gradient(-45deg,#000,#111,#330000,#001133);background-size:400% 400%;animation:bgmove 15s ease infinite;}
-@keyframes bgmove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-h1{color:#ff3333;font-size:3em;margin:30px 0;text-shadow:2px 2px 10px #000;}
-h2{color:#00ffff;font-size:1.8em;margin:15px 0;}
-p{color:#ffcc00;font-size:1.3em;text-shadow:1px 1px 5px #000;}
-.card{background:rgba(0,0,0,0.8);padding:20px;border-radius:20px;width:420px;margin:20px auto;box-shadow:0 0 20px #ff0000;}
-input{padding:12px;width:80%;border:none;border-radius:10px;margin:10px 0;}
-button{padding:12px 25px;border:none;border-radius:10px;font-size:1.2em;color:#fff;background:linear-gradient(45deg,#0066ff,#cc00ff);cursor:pointer;}
-button:hover{background:linear-gradient(45deg,#ff3333,#ff9900);}
-#likeResponse{margin-top:15px;font-size:1.2em;color:#00ff99;}
-footer{margin-top:30px;padding:20px;background:rgba(0,0,0,0.85);color:#ccc;}
-footer span{color:#ff3333;}
-</style>
+  <meta charset="UTF-8">
+  <title>GPL TEAM</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      margin: 0;
+      overflow-x: hidden;
+      height: 100vh;
+      position: relative;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .login, .main {
+      display: none;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .login { display: flex; }
+    input {
+      padding: 10px;
+      border: 1px solid #00ff00;
+      background: black;
+      color: #00ff00;
+      font-size: 1.1em;
+      border-radius: 8px;
+      margin: 5px 0;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #00ff00;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px;
+      color: black;
+      box-shadow: 0 0 15px #00ff00;
+    }
+    button:hover {
+      box-shadow: 0 0 30px #00ff00;
+    }
+    h1 { text-shadow: 0 0 20px #00ff00; }
+    #welcome {
+      font-size: 1.6em;
+      text-align: center;
+      white-space: pre-wrap;
+      margin: 20px;
+      text-shadow: 0 0 10px #00ff00;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(0,0,0,0.7);
+      border: 1px solid #00ff00;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 20px #00ff00;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px #00ff00;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #00ff00;
+      margin-top: 20px;
+      font-size: 1.1em;
+    }
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: black;
+      border: 2px solid #00ff00;
+      padding: 20px;
+      width: 70%;
+      max-height: 70%;
+      overflow-y: auto;
+      box-shadow: 0 0 40px #00ff00;
+      border-radius: 12px;
+      color: #00ff00;
+      z-index: 1000;
+      animation: fadeIn 0.5s ease;
+    }
+    .popup h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px #00ff00;
+    }
+    .popup button {
+      display: block;
+      margin: 10px auto 0;
+      background: red;
+      color: white;
+      box-shadow: 0 0 15px red;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+  </style>
 </head>
 <body>
-<h1>🔥 نظام لايكات رسمي 🔥</h1>
-<h2>👑 بإشراف DRAGON LNC – ملك البانلات</h2>
-<div class="card">
-  <input type="text" id="u" placeholder="أدخل UID اللاعب">
-  <br>
-  <button id="b">🚀 أرسل لايكات</button>
-  <p id="r"></p>
-</div>
-<footer>
-  <p>⚡ أقوى نظام لايكات مجاني تحت إشراف <span>DRAGON LNC</span></p>
-  <p>📱 تواصل معي على التليجرام: <a href="https://t.me/ABOD_AL3NZI" style="color:#00ffff">@ABOD_AL3NZI</a></p>
-  <p>☎️ رقم الهاتف: <span>+201020580478</span></p>
-</footer>
-<script>
-(function(){
-  const _0x1d=["value","trim","getElementById","u","click","addEventListener","b","innerHTML","r","⚠️ من فضلك أدخل UID صحيح.","then","json","✅ تم إضافة لايكات بنجاح<br>👤 UID اللاعب: <span style=\"color:#ffcc00;\">","</span><br>👍 اللايكات قبل: <span style=\"color:#ff3333;\">","</span><br>🔥 اللايكات بعد: <span style=\"color:#00ff99;\">","</span><br>💎 تحياتي ليك من الأسطورة <span style=\"color:#00ffff;\">DRAGON LNC</span><br>🚀 الموقع الرسمي لللايكات ✨","catch","⚠️ السيرفر غير متاح حالياً.","https://like-rose.vercel.app/apclikes?uid="];
-  const u=document[_0x1d[2]](_0x1d[3]);
-  const b=document[_0x1d[2]](_0x1d[6]);
-  const r=document[_0x1d[2]](_0x1d[8]);
-  b[_0x1d[5]](_0x1d[4],function(){
-    const id=u[_0x1d[0]][_0x1d[1]]();
-    if(id===""){r[_0x1d[7]]=_0x1d[9];return;}
-    fetch(_0x1d[19]+id)[_0x1d[10]](res=>res[_0x1d[11]]())[_0x1d[10]](()=>{
-      r[_0x1d[7]]=_0x1d[12]+id+_0x1d[13]+Math.floor(Math.random()*500)+_0x1d[14]+(Math.floor(Math.random()*500)+100)+_0x1d[15];
-    })[_0x1d[16]](()=>{r[_0x1d[7]]=_0x1d[17];});
-  });
-})();
-</script>
+
+  <!-- خلفية Matrix -->
+  <canvas id="matrix"></canvas>
+
+  <!-- شاشة تسجيل الدخول -->
+  <div class="login" id="login">
+    <h1>🚀 أدخل الباسورد 🚀</h1>
+    <input type="password" id="password" placeholder="أدخل كلمة المرور">
+    <button onclick="checkPassword()">دخول</button>
+    <p id="error" style="color:red;"></p>
+  </div>
+
+  <!-- الصفحة الرئيسية -->
+  <div class="main" id="main">
+    <h1>💻 GPL TEAM 💻</h1>
+    <p id="welcome"></p>
+
+    <div class="cards">
+      <!-- API معلومات -->
+      <div class="card">
+        <h2>📊 جلب المعلومات</h2>
+        <input type="text" id="infoUid" placeholder="أدخل ID">
+        <input type="text" id="infoRegion" placeholder="أدخل Region">
+        <button onclick="getInfo()">عرض المعلومات</button>
+      </div>
+
+      <!-- API لايكات -->
+      <div class="card">
+        <h2>💖 زيادة لايكات</h2>
+        <input type="text" id="likeUid" placeholder="أدخل ID">
+        <input type="text" id="likeRegion" placeholder="أدخل Region">
+        <button onclick="addLike()">إضافة لايكات</button>
+      </div>
+    </div>
+
+    <footer>💚 جميع الحقوق محفوظة GPL TEAM 💚</footer>
+  </div>
+
+  <!-- صوت هاكرز -->
+  <audio id="hackerSound">
+    <source src="https://www.myinstants.com/media/sounds/hacker.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Popup -->
+  <div id="popup" class="popup">
+    <h2>📢 النتيجة</h2>
+    <pre id="popupContent"></pre>
+    <button onclick="closePopup()">إغلاق</button>
+  </div>
+
+  <script>
+    // تسجيل الدخول
+    function checkPassword() {
+      const pass = document.getElementById("password").value;
+      if (pass === "GPL") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("main").style.display = "block";
+        document.getElementById("hackerSound").play();
+        typeWriter("✅ تم دخولك إلى موقع GPL TEAM ⚡", "welcome", 100);
+      } else {
+        document.getElementById("error").innerText = "❌ كلمة المرور خاطئة!";
+      }
+    }
+
+    function typeWriter(text, elementId, speed) {
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          document.getElementById(elementId).innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        }
+      }
+      typing();
+    }
+
+    // API Info
+    async function getInfo() {
+      const uid = document.getElementById("infoUid").value;
+      const region = document.getElementById("infoRegion").value;
+      const res = await fetch(`https://xp-full-info-v4.vercel.app/player-info?uid=${uid}&region=${region}`);
+      const data = await res.json();
+      openPopup(JSON.stringify(data, null, 2));
+    }
+
+    // API Likes
+    async function addLike() {
+      const uid = document.getElementById("likeUid").value;
+      const region = document.getElementById("likeRegion").value;
+      const res = await fetch(`https://like-xp-v12.vercel.app/like?server_name=${region}&uid=${uid}&key=xp`);
+      const data = await res.text();
+      openPopup(data);
+    }
+
+    // Popup
+    function openPopup(content) {
+      document.getElementById("popupContent").innerText = content;
+      document.getElementById("popup").style.display = "block";
+    }
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    // Matrix Effect
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = "01GPLTEAMHACKER";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00ff00";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(draw, 33);
+  </script>
 </body>
 </html>
